@@ -1,0 +1,29 @@
+name: "secret-vault"
+author: "Shellmates"
+author_link: "https://github.com/Shellmates"
+difficulty: medium
+description: |
+  > Bienvenue au **Secret Vault**. Seuls les administrateurs peuvent accéder au coffre.
+  > Connecte-toi avec un compte utilisateur, puis trouve comment obtenir les privilèges admin.
+  > Le serveur utilise des tokens JWT pour l'authentification.
+category: web
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**Shellmates**"
+flags:
+  - shellmates{jwt_n0n3_4lg_1s_d4ng3r0us}
+tags:
+  - web
+  - jwt
+  - authentication
+files:
+  - app.py
+deployment:
+  isolate: true
+  conn_type: http
+  containerPort: 3000

@@ -1,0 +1,23 @@
+name: "Merry secret"
+author: "fatima"
+author_link: "none"
+difficulty: medium
+description: |
+  > Something suspicious is here , can you get my secret
+category: forensics
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**fatima**"
+flags:
+  - shellmates{ch4ch4_3ncryp710n_1s_n0_m47ch_f0r_y0u}
+tags:
+  - Network
+  - Forensics
+files:
+  - challenge/chall.pcap
+deployment:

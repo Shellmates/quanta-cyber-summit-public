@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width,initial-scale=1")
+    title #{title || 'Challenge'}
+    style.
+      html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+      body{display:flex;flex-direction:column;background:linear-gradient(135deg,#0f172a,#0b1220);color:#e6eef8}
+      header{padding:24px 40px;display:flex;justify-content:space-between;align-items:center}
+      .brand{font-weight:700;font-size:20px}
+      nav a{color:#cfe7ff;margin-left:16px;text-decoration:none}
+      main{flex:1;padding:40px}
+      .hero{background:rgba(255,255,255,0.03);padding:32px;border-radius:12px;max-width:900px;margin:0 auto;text-align:center}
+      .button{display:inline-block;margin:12px;padding:10px 18px;background:#2b6cb0;color:white;border-radius:8px;text-decoration:none}
+      .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:20px}
+      .card{background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;text-align:center}
+      .pagination{margin-top:20px;text-align:center}
+      form{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+      input,textarea{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:inherit}
+      button{padding:10px 14px;border-radius:8px;background:#2563eb;border:none;color:white}
+  body
+    header
+      .brand Auto Gallery
+      nav
+        a(href="/") Home
+        a(href="/gallery") Gallery
+        a(href="/feedback") Contact
+    main
+      block content
+    footer(style="padding:16px;text-align:center;color:#a8c0df")
+      | &copy; 2026 Auto Gallery. All rights reserved.

@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  silentship-web:
+    build: .
+    container_name: silentship-challenge
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    volumes:
+      - ./ground_truth.csv:/app/ground_truth.csv:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - ctf-network
+
+networks:
+  ctf-network:
+    driver: bridge

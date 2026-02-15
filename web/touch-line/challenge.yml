@@ -1,0 +1,25 @@
+name: "Touch Line"
+author: "sleep_well."
+author_link: ""
+difficulty: hard
+description: |
+  > I hate football , do you ?
+category: web
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**sleep_well.**"
+flags:
+  - shellmates{If_Y0U_rE_SE31ng_THIs_ch4P4Ux}
+tags:
+  - web
+files:
+  - ./challenge.zip
+deployment:
+  isolate: false
+  conn_type: http
+  containerPort: 4002

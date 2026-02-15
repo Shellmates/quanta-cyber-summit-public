@@ -1,0 +1,19 @@
+name : VIP ONLY
+author : Shellmates
+author_link : https://github.com/Shellmates
+difficulty : hard
+description : |
+  > You want in right? Then prove you're a VIP or get lost
+category: reverse
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**Shellmates**"
+flags:
+  - shellmates{G1vE_tHiS_DudE_a_VIP_InVIt3_HE_I$_4_ReV3r$ING_b3a$T}
+files :
+  - ./challenge/chall

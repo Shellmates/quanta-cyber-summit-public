@@ -1,0 +1,11 @@
+<%- include('partials/header', { user }) %>
+<section class="panel narrow">
+  <h2>Access Blocked</h2>
+  <p>
+    You need the
+    <strong><%= role ? role.charAt(0).toUpperCase() + role.slice(1) : role %></strong>
+    clan to access this page.
+  </p>
+  <p class="muted">Only Uchiha can pass.</p>
+</section>
+<%- include('partials/footer') %>

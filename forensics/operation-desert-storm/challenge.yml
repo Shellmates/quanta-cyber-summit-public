@@ -1,0 +1,29 @@
+name: Operation Desert Storm
+author: aptx4869
+author_link: https://github.com/ayazedd7
+difficulty: medium
+description: |
+  > Intelligence reports indicate that an Iranian cyber unit successfully
+  > infiltrated the Advanced Test Reactor (ATR) at Idaho National Laboratory.
+  >
+  > Files: operation_desert_storm.pcap
+  > Flag format: shellmates{...}
+category: forensics
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**aptx4869**"
+flags:
+  - shellmates{NUC_R0D5_0V3RR1D3}
+tags:
+  - ics
+  - scada
+  - profinet
+  - dnp3
+  - network-forensics
+files:
+  - operation_desert_storm.pcap

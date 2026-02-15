@@ -1,0 +1,3 @@
+*.o
+compiler
+.DS_Store

@@ -1,0 +1,10 @@
+services:
+  challenge1:
+    build: .
+    ports:
+      - "5001:5000"
+    environment:
+      BOT_BASE_URL: "http://127.0.0.1:5000"
+      FLAG: "SHELLMATES{1mAg1NE_Y0u_c0uLD_dO_th1s_F0R_rEAL_P30pl3}"
+
+

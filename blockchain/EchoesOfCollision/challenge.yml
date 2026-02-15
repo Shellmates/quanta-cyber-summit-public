@@ -1,0 +1,25 @@
+name: Echoes Of Collision
+author: 0xkryvon
+author_link: https://github.com/0xkryvon
+difficulty: easy
+description: In the hall of mirrors, different reflections can lead to the same destination. Success lies in recognizing the resonance within the noise.
+category: blockchain
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**0xkryvon**"
+flags:
+  - shellmates{eCho3s_oF_C0llI$10n_r3b0uNDINg_tHROUgh_The_4B1_V01d}
+tags:
+  - smart-contracts
+  - blockchain
+  - solidity
+
+files:
+  - contracts/EchoesOfCollision.sol
+  - contracts/Setup.sol
+connection_info: https://echoes-collision.quantaclubdz.com

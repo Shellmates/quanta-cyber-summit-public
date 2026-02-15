@@ -1,0 +1,13 @@
+name: hashed_gallery
+
+services:
+  challenge:
+    build: .
+    environment:
+      - FLAG=shellmates{Nice_sSti_BUt_env_wAS_too_ObVIouS_TRy_AgAIn} #  fake flag (like I always do xD) , real flag in the file flag.txt, impossible to guess, dead end
+      - PORT=3000
+      - ADMIN_PASSWORD=b7140ed798b6b7140ed798b6929ba1d8279571e732c929ba1d879571e732c # impossible to guess, dead end
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    

@@ -1,0 +1,20 @@
+name : A rabbit hole
+author : Shellmates
+author_link : https://github.com/Shellmates
+difficulty : medium
+description : |
+  > you can find rabbit holes everywhere but this is special and only for the strong hearts
+category: reverse
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**Shellmates**"
+flags :
+  - shellmates{ONlY_Th3_Brav3_Can_G0_Thi$_far}
+files :
+  - ./challenge/challenge
+  - ./challenge/output.enc

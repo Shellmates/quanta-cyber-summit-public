@@ -1,0 +1,24 @@
+name: The Genesis Crypt
+author: 0xkryvon
+author_link: https://github.com/0xkryvon
+difficulty: easy
+description: Every beginning carries the laws of its era. When the gates are left wide, the foundations themselves become an open inheritance.
+category: blockchain
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**0xkryvon**"
+flags:
+  - shellmates{gH0$TS_Of_$ol1DiTy_V04x_HAuNT_ThIS_c0d3}
+tags:
+  - smart-contracts
+  - blockchain
+  - solidity
+files:
+  - contracts/GenesisCrypt.sol
+  - contracts/Setup.sol
+connection_info: https://genesis-crypt.quantaclubdz.com

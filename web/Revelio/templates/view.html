@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spell View</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hp-theme.css') }}" />
+    <script src="{{ url_for('static', filename='js/dompurify.min.js') }}"></script>
+  </head>
+  <body>
+    <main class="scene">
+      <header>
+        <h1>Spell Preview</h1>
+        <p class="subtitle">Your spell lines, sorted by the order you picked. Are you satisfied ?</p>
+      </header>
+      <section id="content" class="spell-list"></section>
+    </main>
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var text = params.get("text") || "";
+        var sanitized = DOMPurify.sanitize(text);
+        var lines = sanitized.split(/\r?\n/);
+        var sort = params.get("sort");
+        if (sort === "desc") {
+          lines.sort(function (a, b) {
+            return b.localeCompare(a);
+          });
+        } else {
+          lines.sort(function (a, b) {
+            return a.localeCompare(b);
+          });
+        }
+        var content = document.getElementById("content");
+        content.innerHTML = lines
+          .map(function (line) {
+            return "<div>" + line + "</div>";
+          })
+          .join("");
+      })();
+    </script>
+  </body>
+</html>

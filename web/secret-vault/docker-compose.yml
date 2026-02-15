@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  challenge:
+    build: .
+    container_name: jwt_none_challenge
+    ports:
+      - "3011:3000"
+    environment:
+      - FLAG=shellmates{jwt_n0n3_4lg_1s_d4ng3r0us}
+    restart: unless-stopped

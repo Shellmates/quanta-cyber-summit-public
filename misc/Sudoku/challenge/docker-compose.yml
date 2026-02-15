@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  ctf-sudoku:
+    build: .
+    container_name: ctf-sudoku-challenge
+    ports:
+      - "5002:5000"
+    environment:
+      - FLASK_ENV=production
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    volumes:
+      # Optionally persist models (comment out if you want to rebuild each time)
+      - ./model_correct.h5:/app/model_correct.h5
+      - ./model_poisoned.h5:/app/model_poisoned.h5
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - ctf-network
+
+networks:
+  ctf-network:
+    driver: bridge

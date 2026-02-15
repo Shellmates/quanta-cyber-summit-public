@@ -1,0 +1,25 @@
+name: The Oracle Paradox
+author: 0xkryvon
+author_link: https://github.com/0xkryvon
+difficulty: medium
+description: The Oracle does not blink. While you exhaust yourself searching for a rift that isn't there, the timeline continues its inevitable march.
+category: blockchain
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**0xkryvon**"
+flags:
+  - shellmates{RE4d0nlY_r3ENTRaNcy_pAR4doX_Sh4TterinG_THe_t3MPoRal_orACle}
+tags:
+  - smart-contracts
+  - blockchain
+  - solidity
+files:
+  - contracts/OracleParadox.sol
+  - contracts/ReentrancyGuard.sol
+  - contracts/Setup.sol
+connection_info: https://oracle-paradox.quantaclubdz.com

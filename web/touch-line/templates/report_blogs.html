@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Report Blogs{% endblock %}
+
+{% block content %}
+  <h1>Report Blogs</h1>
+  <p class="muted">
+    Send up to 2 links for the review bot to open, in the exact order you provide.
+  </p>
+
+  <form id="report-form">
+    <label for="link-1">Link 1</label>
+    <input id="link-1" name="link_1" placeholder="/posts/1" required>
+
+    <label for="link-2">Link 2 (optional)</label>
+    <input id="link-2" name="link_2" placeholder="/flag">
+
+    <button type="submit">Send to Bot</button>
+  </form>
+
+  <p id="report-status" class="muted"></p>
+
+  <h2>Available article paths</h2>
+  <ul>
+    {% for post in posts %}
+      <li><code>/posts/{{ post.id }}</code> - {{ post.title }}</li>
+    {% endfor %}
+    <li><code>/flag</code> - bot-only endpoint</li>
+  </ul>
+
+  <script>
+    async function submitBotReport(event) {
+      event.preventDefault();
+
+      const link1 = document.getElementById("link-1").value.trim();
+      const link2 = document.getElementById("link-2").value.trim();
+      const status = document.getElementById("report-status");
+      const links = [link1, link2].filter(Boolean);
+
+      if (links.length === 0) {
+        status.textContent = "Provide at least one link.";
+        status.className = "error";
+        return;
+      }
+
+      if (links.length > 2) {
+        status.textContent = "You can only send up to 2 links.";
+        status.className = "error";
+        return;
+      }
+
+      try {
+        const response = await fetch("{{ url_for('api.bot_visit') }}", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({links})
+        });
+        const data = await response.json();
+
+        if (!response.ok || !data.ok) {
+          throw new Error(data.error || `Request failed with status ${response.status}.`);
+        }
+
+        status.textContent = `Bot visited: ${data.visited.join(", ")}`;
+        status.className = "ok";
+      } catch (error) {
+        status.textContent = error.message || "Request failed.";
+        status.className = "error";
+      }
+    }
+
+    document.getElementById("report-form").addEventListener("submit", submitBotReport);
+  </script>
+{% endblock %}

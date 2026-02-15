@@ -1,0 +1,27 @@
+name: The Quantum Entanglement
+author: 0xkryvon
+author_link: https://github.com/0xkryvon
+difficulty: medium
+description: Entanglement is a delicate state, where two points share a single reality across the void. To observe is to change, and to change is to solve.
+category: blockchain
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**0xkryvon**"
+flags:
+  - shellmates{QUaNTUM_3nTaNGLeMeNt_C0ll4ps3d_bY_d3LEgATecALl_M4gIC}
+tags:
+  - smart-contracts
+  - blockchain
+  - solidity
+files:
+  - contracts/EntanglementFactory.sol
+  - contracts/ProxyDelegate.sol
+  - contracts/QuantumVault.sol
+  - contracts/Setup.sol
+  - contracts/StateOracle.sol
+connection_info: https://quantum-entanglement.quantaclubdz.com

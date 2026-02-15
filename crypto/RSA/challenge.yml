@@ -1,0 +1,23 @@
+name: "RSA_game"
+author: "LordOfAyyubid"
+author_link: "https://github.com/salahbgf288"
+difficulty: ezmed
+description: |
+  > Find the right attack to break this RSA system.
+category: crypto
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**LordOfAyyubid**"
+flags:
+  - shellmates{Y0u_Are_a_Genius!!}
+tags:
+  - cryptography
+  - RSA
+  - prime numbers
+files:
+  - ./source.py

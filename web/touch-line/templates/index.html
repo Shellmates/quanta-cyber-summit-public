@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Touchline Journal | Matchday Stories{% endblock %}
+
+{% block content %}
+  <h1>Matchday Stories</h1>
+  <p class="muted">
+    Fresh reads on lineups, set-piece plans, and key moments from the latest fixtures.
+  </p>
+
+  <h2>Latest Articles</h2>
+  <ul class="post-list">
+    {% for post in posts %}
+      <li>
+        <a href="{{ url_for('posts.post_details', post_id=post.id) }}">{{ post.title }}</a>
+        <p class="muted">{{ post.body }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if last_visited %}
+    <p class="muted">You recently opened article #{{ last_visited }}.</p>
+  {% endif %}
+{% endblock %}

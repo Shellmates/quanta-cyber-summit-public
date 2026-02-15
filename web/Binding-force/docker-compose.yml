@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "3005:3000"
+    environment:
+      PORT: "3000"
+      FLAG: "SHELLMATES{1T_Se3Ms_S0m30NE_h4s_4N_uNsToPp4bLE_ThIrSt_F0R_Bl00d}"
+      BASE_URL: "http://localhost:3000"

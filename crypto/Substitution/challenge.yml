@@ -1,0 +1,23 @@
+name: "Substitution_Cipher"
+author: "LordOfAyyubid"
+author_link: "https://github.com/salahbgf288"
+difficulty: medium
+description: |
+  > My substitution cipher seems unbreakable, could you figure out how it works and break it.
+category: crypto
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**LordOfAyyubid**"
+flags:
+  - shellmates{YOU_GOT_IT_NEXT_TIME_WILL_BE_HARD}
+tags:
+  - cryptography
+  - substitution
+  - frequency
+files:
+  - ./Substitution_cipher.txt

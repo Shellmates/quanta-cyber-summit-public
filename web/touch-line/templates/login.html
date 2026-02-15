@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Log In{% endblock %}
+
+{% block content %}
+  <h1>Log In</h1>
+  <p class="muted">Sign in to save your profile and keep up with new match stories.</p>
+
+  <form method="post" action="{{ url_for('auth.login') }}">
+    <label for="username">Username</label>
+    <input id="username" name="username" value="{{ username if username else '' }}" required>
+
+    <label for="password">Password</label>
+    <input id="password" type="password" name="password" required>
+
+    <button type="submit">Log In</button>
+  </form>
+{% endblock %}

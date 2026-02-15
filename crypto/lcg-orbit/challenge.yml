@@ -1,0 +1,30 @@
+name: "lcg-orbit"
+author: "Shellmates"
+author_link: "https://github.com/Shellmates"
+difficulty: hard
+description: |
+  > A custom **64-bit Linear Congruential Generator (LCG)** was used as a keystream to XOR-encrypt two messages.
+  > One of them is fully known in clear, the other hides the flag. The LCG parameters and seed were removed.
+  > Recover the LCG and decrypt the flag. The flag format is `shellmates{...}`.
+category: crypto
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**Shellmates**"
+flags:
+  - shellmates{lCG_prng_k3Y_r3C0v3ry}
+tags:
+  - crypto
+  - prng
+  - lcg
+  - stream-cipher
+  - key-recovery
+files:
+  - plaintext_known.txt
+  - ciphertext_known.hex
+  - ciphertext_flag.hex
+  - encrypt.py

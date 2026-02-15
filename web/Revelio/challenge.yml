@@ -1,0 +1,22 @@
+name: Revelio
+author: sleep_well.
+author_link:
+difficulty: hard
+description: |
+  > Your mission is simple: cast a spell on the Gatekeeper to make him reveal the secret behind the locked door. Be careful - he hears the spell better than he hears you.
+category: web
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**sleep_well.**"
+flags:
+  - SHELLMATES{1mAg1NE_Y0u_c0uLD_dO_th1s_F0R_rEAL_P30pl3}
+tags:
+  - web
+files:
+  - ./challenge.zip
+connection_info: https://revelio.quantaclubdz.com

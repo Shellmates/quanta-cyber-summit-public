@@ -1,0 +1,28 @@
+name: Sudoku Validator
+author: Raounak
+difficulty: easy
+description: |
+  AI-powered Sudoku validator using deep learning.
+  Submit your Sudoku grid and answer:
+  1. Is the grid valid?
+  2. What will the AI predict?
+  Our model is highly trained and confident in its predictions.
+  Work with the AI to validate puzzles correctly.
+category: misc
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**Raounak**"
+flags:
+  - shellmates{AI_c4n_l13_w1th_c0nf1d3nc3}
+tags:
+  - ai
+  - ml
+  - neural-network
+  - deep-learning
+  - adversarial
+connection_info: https://sudoko.quantaclubdz.com/

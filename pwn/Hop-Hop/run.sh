@@ -1,0 +1,1 @@
+docker build -t hop-hop . && docker run --rm -d -p 10000:10000 --name pwn-hop-hop hop-hop

@@ -1,0 +1,44 @@
+# Documentation files
+README.md
+WRITEUP.md
+QUICKSTART.md
+DEPLOYMENT.md
+CTF_DEPLOYMENT_GUIDE.md
+SUMMARY.md
+
+# Test and setup scripts
+test_challenge.py
+setup.sh
+run_production.sh
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Service files (for systemd, not needed in Docker)
+*.service

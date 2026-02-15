@@ -1,0 +1,57 @@
+extends layout
+
+block content
+  if renderedThanks
+    h2 Thank you — Confirmation
+    p(style="color:#cbd5e1;margin-bottom:8px;font-style:italic") Note: your message will reach the admin on a secret page — even robots can't find it. Shh xD
+
+    != renderedThanks
+    p
+      a.button(href="/gallery") Back to Gallery
+  else
+    h2 Contact Us
+    form(method="post" action="/feedback" id="feedbackForm")
+      // include client-sent timestamp
+      input(type="hidden" name="when" id="whenInput")
+
+      label(for="name") Name
+      input(type="text" name="name" id="name" required)
+
+      label(for="email") Email
+      input(type="email" name="email" id="email" required)
+
+      label(for="message") Message
+      textarea(name="message" id="message" rows="6" required)
+
+      button(type="submit") Send Message
+
+      
+
+    script.
+      // set the `when` field to the client time ISO string before submit
+      (function () {
+        const whenInput = document.getElementById('whenInput');
+        const feedbackForm = document.getElementById('feedbackForm');
+
+        function updateWhen() {
+          if (!whenInput) return;
+          const d = new Date();
+          const pad = (n) => String(n).padStart(2, '0');
+          const Y = d.getFullYear();
+          const M = pad(d.getMonth() + 1);
+          const D = pad(d.getDate());
+          const h = pad(d.getHours());
+          const m = pad(d.getMinutes());
+          whenInput.value = `${Y}-${M}-${D} ${h}:${m}`;
+        }
+
+        // initialize timestamp immediately
+        updateWhen();
+
+        // refresh timestamp at submit time
+        if (feedbackForm) {
+          feedbackForm.addEventListener('submit', function () {
+            updateWhen();
+          });
+        }
+      })();

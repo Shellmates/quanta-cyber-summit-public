@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+  <a href="{{ url_for('posts.index') }}">Back to all stories</a>
+
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.body }}</p>
+
+  <p class="muted">More tactical breakdowns and matchday notes are published every week.</p>
+
+  <script>
+    async function trackPostVisit() {
+      try {
+        const url = "{{ url_for('api.track_last_visited') }}?post_id={{ post.id }}";
+        await fetch(url);
+      } catch (_error) {
+        // Best-effort tracking; ignore errors in UI.
+      }
+    }
+
+    trackPostVisit();
+  </script>
+{% endblock %}

@@ -1,0 +1,20 @@
+name: "xl-bin"
+author: "0x4ym3n"
+difficulty: medium
+category: reverse
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**0x4ym3n**"
+flags:
+  - shellmates{d3c0mp1l1ng_py1nst4ll3r_1s_3z_m0d3_s0_k33p_y0ur_ch4ll3ng3s_cr34t1v3_4nd_fun_t0_br34k}
+description: |
+  A tricky challenge with hidden secrets.
+tags:
+  - reverse
+files:
+  - ./challenge

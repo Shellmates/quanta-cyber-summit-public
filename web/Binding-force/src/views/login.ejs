@@ -1,0 +1,19 @@
+<%- include('partials/header', { user: null }) %>
+<section class="panel narrow">
+  <h2>Login</h2>
+  <% if (error) { %>
+    <div class="alert"><%= error %></div>
+  <% } %>
+  <form action="/login" method="post" class="form">
+    <label>
+      <span>Username</span>
+      <input type="text" name="username" placeholder="guest" required />
+    </label>
+    <label>
+      <span>Password</span>
+      <input type="password" name="password" placeholder="guest" required />
+    </label>
+    <button type="submit">Enter</button>
+  </form>
+</section>
+<%- include('partials/footer') %>

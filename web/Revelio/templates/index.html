@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Revelio Gate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hp-theme.css') }}" />
+  </head>
+  <body>
+    <main class="scene">
+      <header>
+        <h1>Revelio</h1>
+        <p class="subtitle">Cast a spell on the Gatekeeper. He listens to the spell, not how loud you are.</p>
+      </header>
+      <form class="spell-form" method="post" action="/submit">
+        <div class="form-row">
+          <label for="text">Spell to Send</label>
+          <textarea id="text" name="text" rows="6" placeholder="Try: Lumos, Alohomora, or Revelio" required></textarea>
+        </div>
+        <div class="form-row">
+          <label for="sort">Spell Order</label>
+          <select id="sort" name="sort">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+        </div>
+        <div class="actions">
+          <button type="submit">Send</button>
+          <button class="secondary" type="submit" formaction="/preview" formmethod="get">Preview</button>
+        </div>
+      </form>
+      <p class="notice">Your spell will be read once by the GateKeeper.</p>
+    </main>
+  </body>
+</html>

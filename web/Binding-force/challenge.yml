@@ -1,0 +1,22 @@
+name: Binding Force
+author: sleep_well.
+author_link:
+difficulty: hard
+description: |
+  > They say, If you want to bring down someone strong, you strike through their closest friend.
+category: web
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**sleep_well.**"
+flags:
+  - SHELLMATES{1T_Se3Ms_S0m30NE_h4s_4N_uNsToPp4bLE_ThIrSt_F0R_Bl00d}
+tags:
+  - web
+files:
+  - ./challenge.zip
+connection_info: https://binding-force.quantaclubdz.com

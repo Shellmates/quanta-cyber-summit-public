@@ -1,0 +1,18 @@
+<%- include('partials/header', { user }) %>
+<section class="panel">
+  <h2>Profile</h2>
+  <div class="profile-grid">
+    <div>
+      <h3>Identity</h3>
+      <p><strong>User:</strong> <%= user.sub %></p>
+      <p><strong>Clan:</strong> <%= user.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : '' %></p>
+    </div>
+    <div>
+      <h3>Clan Notes</h3>
+      <p class="muted">
+        Sinjo: duty and protection. Uchiha: vision and power.
+      </p>
+    </div>
+  </div>
+</section>
+<%- include('partials/footer') %>

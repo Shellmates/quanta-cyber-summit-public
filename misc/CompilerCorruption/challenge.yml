@@ -1,0 +1,18 @@
+name: "Compiler Debugger"
+author: L1n4
+difficulty: medium
+description: |
+  Something's preventing it from completing the integrity checks.
+category: misc
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**L1n4**"
+flags:
+  - shellmates{c0mp1l3r_d3bugg3r}
+files:
+  - ./challenge.c

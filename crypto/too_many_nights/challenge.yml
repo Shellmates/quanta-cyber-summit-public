@@ -1,0 +1,20 @@
+name: "Too Many Nights"
+author: "Izouss"
+difficulty: hard
+description: |
+  > I just hope no LLM can solve this
+category: crypto
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**Izouss**"
+flags:
+  - shellmates{I_wanted_y8w3ly_to_know_that_izouss_says_hi}
+tags:
+  - RSA
+files:
+  - ./chall.py

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SilentShip - Anomaly Detection Grading</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        
+        <header class="header">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40">
+                    <rect x="5" y="15" width="30" height="15" fill="white" stroke="white" stroke-width="2"/>
+                    <polygon points="5,15 20,5 35,15" fill="white"/>
+                    <rect x="17" y="20" width="6" height="8" fill="black"/>
+                </svg>
+            </div>
+            <h1>SilentShip Grading System</h1>
+            <p class="subtitle">Anomaly Detection Challenge</p>
+        </header>
+
+        
+        <section class="instructions">
+            <h2>Instructions</h2>
+            <div class="instruction-grid">
+                <div class="instruction-item">
+                    <div class="step-number">1</div>
+                    <p>Train your anomaly detection model using <code>train.csv</code></p>
+                </div>
+                <div class="instruction-item">
+                    <div class="step-number">2</div>
+                    <p>Generate predictions for <code>test.csv</code></p>
+                </div>
+                <div class="instruction-item">
+                    <div class="step-number">3</div>
+                    <p>Upload <code>predictions.csv</code> with columns: <code>id</code>, <code>prediction</code></p>
+                </div>
+                <div class="instruction-item">
+                    <div class="step-number">4</div>
+                    <p>Achieve F1 Score ≥ 40% to get the flag</p>
+                </div>
+            </div>
+        </section>
+
+       
+        <section class="upload-section">
+            <h2>Submit Your Predictions</h2>
+            <form id="uploadForm">
+                <div class="file-input-wrapper">
+                    <input type="file" id="fileInput" accept=".csv" required>
+                    <label for="fileInput" id="fileLabel">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <span id="fileName">Choose predictions.csv</span>
+                    </label>
+                </div>
+                <button type="submit" id="submitBtn">
+                    <span id="btnText">Validate Predictions</span>
+                    <span id="btnLoader" class="loader hidden"></span>
+                </button>
+            </form>
+        </section>
+
+        
+        <section id="results" class="results hidden">
+            
+            <div id="successMessage" class="result-box success hidden">
+                <div class="result-icon">✓</div>
+                <h2>Success!</h2>
+                <p id="successText"></p>
+                <div class="flag-box">
+                    <div class="flag-label">Your Flag:</div>
+                    <code id="flagValue"></code>
+                </div>
+            </div>
+
+            
+            <div id="failureMessage" class="result-box failure hidden">
+                <div class="result-icon">✗</div>
+                <h2>Not Quite There Yet</h2>
+                <p id="failureText"></p>
+            </div>
+
+           
+            <div id="metricsSection" class="metrics hidden">
+                <h3>Performance Metrics</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Accuracy</div>
+                        <div class="metric-value" id="accuracyValue">-</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Precision</div>
+                        <div class="metric-value" id="precisionValue">-</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Recall</div>
+                        <div class="metric-value" id="recallValue">-</div>
+                    </div>
+                    <div class="metric-card highlight">
+                        <div class="metric-label">F1 Score</div>
+                        <div class="metric-value" id="f1Value">-</div>
+                    </div>
+                </div>
+
+                <div class="predictions-summary">
+                    <h4>Prediction Summary</h4>
+                    <div class="summary-row">
+                        <span>Total Samples:</span>
+                        <span id="totalCount">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Predicted Normal:</span>
+                        <span id="normalCount">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Predicted Anomalies:</span>
+                        <span id="anomalyCount">-</span>
+                    </div>
+                </div>
+            </div>
+
+           
+            <div id="errorMessage" class="error-box hidden">
+                <div class="error-icon">⚠</div>
+                <h3>Error</h3>
+                <p id="errorText"></p>
+            </div>
+        </section>
+
+        
+        <footer class="footer">
+            <p>SilentShip Challenge © 2024 | Machine Learning CTF</p>
+        </footer>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const fileLabel = document.getElementById('fileLabel');
+        const fileName = document.getElementById('fileName');
+        const uploadForm = document.getElementById('uploadForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnLoader = document.getElementById('btnLoader');
+        const results = document.getElementById('results');
+
+        
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                fileName.textContent = e.target.files[0].name;
+                fileLabel.classList.add('has-file');
+            } else {
+                fileName.textContent = 'Choose predictions.csv';
+                fileLabel.classList.remove('has-file');
+            }
+        });
+
+        
+        uploadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const file = fileInput.files[0];
+            if (!file) {
+                showError('Please select a file');
+                return;
+            }
+
+           
+            submitBtn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoader.classList.remove('hidden');
+
+            
+            hideAllResults();
+
+            
+            const formData = new FormData();
+            formData.append('predictions', file);
+
+            try {
+                const response = await fetch('/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showSuccess(data);
+                } else {
+                    if (response.status >= 400) {
+                        showError(data.error || 'Validation failed');
+                    } else {
+                        showFailure(data);
+                    }
+                }
+            } catch (error) {
+                showError('Network error. Please try again.');
+            } finally {
+                
+                submitBtn.disabled = false;
+                btnText.classList.remove('hidden');
+                btnLoader.classList.add('hidden');
+            }
+        });
+
+        function showSuccess(data) {
+            results.classList.remove('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+            document.getElementById('successText').textContent = data.message;
+            document.getElementById('flagValue').textContent = data.flag;
+            showMetrics(data);
+        }
+
+        function showFailure(data) {
+            results.classList.remove('hidden');
+            document.getElementById('failureMessage').classList.remove('hidden');
+            document.getElementById('failureText').textContent = data.message;
+            showMetrics(data);
+        }
+
+        function showError(message) {
+            results.classList.remove('hidden');
+            document.getElementById('errorMessage').classList.remove('hidden');
+            document.getElementById('errorText').textContent = message;
+        }
+
+        function showMetrics(data) {
+            if (!data.metrics) return;
+
+            document.getElementById('metricsSection').classList.remove('hidden');
+            
+            document.getElementById('accuracyValue').textContent = 
+                (data.metrics.accuracy * 100).toFixed(1) + '%';
+            document.getElementById('precisionValue').textContent = 
+                (data.metrics.precision * 100).toFixed(1) + '%';
+            document.getElementById('recallValue').textContent = 
+                (data.metrics.recall * 100).toFixed(1) + '%';
+            document.getElementById('f1Value').textContent = 
+                (data.metrics.f1_score * 100).toFixed(1) + '%';
+
+            if (data.counts) {
+                document.getElementById('totalCount').textContent = data.counts.total;
+                document.getElementById('normalCount').textContent = data.counts.predicted_normal;
+                document.getElementById('anomalyCount').textContent = data.counts.predicted_anomalies;
+            }
+        }
+
+        function hideAllResults() {
+            results.classList.add('hidden');
+            document.getElementById('successMessage').classList.add('hidden');
+            document.getElementById('failureMessage').classList.add('hidden');
+            document.getElementById('errorMessage').classList.add('hidden');
+            document.getElementById('metricsSection').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+name: "The Bifrost Relayer"
+author: "0xkryvon"
+author_link: "https://github.com/0xkryvon"
+difficulty: hard
+description: Bridges are built for passage between layers. To walk between worlds, one must understand the thresholds that define them.
+category: blockchain
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**0xkryvon**"
+flags:
+  - shellmates{p4r4DoX_rE3ntRANCY_1N_tHE_siNguL4r1ty_$hELlm4t3s}
+tags:
+  - smart-contracts
+  - blockchain
+  - solidity
+files:
+  - contracts/BifrostLibrary.sol
+  - contracts/BifrostRelayer.sol
+  - contracts/BifrostSingularity.sol
+  - contracts/BifrostVault.sol
+  - contracts/Setup.sol
+connection_info: https://bifrost-relayer.quantaclubdz.com/

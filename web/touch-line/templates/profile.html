@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Supporter Profile{% endblock %}
+
+{% block content %}
+  <h1>Supporter Profile</h1>
+
+  <p><strong>Username:</strong> {{ user.username }}</p>
+  <p><strong>Bio:</strong> {{ (user.bio | safe) if user.bio else 'No bio yet.' }}</p>
+  <p><strong>Joined:</strong> {{ user.created_at }}</p>
+
+  <h2>Reading Activity</h2>
+  <p>
+    Last article opened:
+    <code>{{ last_visited if last_visited else 'none yet' }}</code>
+  </p>
+{% endblock %}

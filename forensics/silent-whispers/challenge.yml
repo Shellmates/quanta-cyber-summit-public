@@ -1,0 +1,27 @@
+name: Silent Whispers
+author: RootAccessX
+difficulty: medium
+description: |
+  A suspicious network capture was recovered from an internal investigation.
+  Nothing obvious appears in the payloads, but something feels... off.
+  Can you uncover what was silently transmitted?
+category: forensics
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**RootAccessX**"
+flags:
+  - shellmates{c0v3rt_tcp_53qu3nc3}
+files:
+  - files/silent_whispers_realistic_hard.pcap
+tags:
+  - tcp
+  - networking
+  - covert-channel
+  - pcap
+  - sequence-numbers
+version: 1.0

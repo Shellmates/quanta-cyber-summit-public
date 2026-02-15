@@ -1,0 +1,24 @@
+name: "word-numbers"
+author: "Shellmates"
+author_link: "https://github.com/Shellmates"
+difficulty: easy
+description: |
+  > A message was intercepted. Each "word" in the message corresponds to a letter.
+  > The words are in **English**. The secret to recover uses the usual format `shellmates{...}`.
+category: crypto
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**Shellmates**"
+flags:
+  - shellmates{wordnumbersarefun}
+tags:
+  - crypto
+  - encoding
+  - english
+files:
+  - ciphertext.txt

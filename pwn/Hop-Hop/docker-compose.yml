@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+
+  challenge:
+
+    build: .
+
+    container_name: pwn-hop-hop
+
+    ports:
+
+      - "10000:10003"
+
+    restart: unless-stopped

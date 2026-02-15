@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  vm_challenge:
+    build: .
+    ports:
+      - "9999:9999"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    read_only: false
+    tmpfs:
+      - /tmp:size=10M,mode=1777
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 50

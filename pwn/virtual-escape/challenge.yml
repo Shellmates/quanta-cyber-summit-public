@@ -1,0 +1,27 @@
+name: Virtual Escape
+description: |
+  A custom bytecode virtual machine awaits your exploitation skills.
+  Analyze the VM, discover its weaknesses, and escape to freedom.
+  Can you find a way to make the VM do what you want?
+difficulty: hard
+points: 500
+category: pwn
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**RootAccessX**"
+flags:
+  - shellmates{v1rtual_esc4p3_compl3t3d}
+author: RootAccessX
+tags:
+  - binary-exploitation
+  - virtual-machine
+  - memory-corruption
+  - reverse-engineering
+connection_info: ncat --ssl virtual-escape.quantaclubdz.com 1337
+file:
+  - ./players_files

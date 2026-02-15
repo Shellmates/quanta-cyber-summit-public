@@ -1,0 +1,30 @@
+name: "jinja-forge"
+author: "Shellmates"
+author_link: "https://github.com/Shellmates"
+difficulty: medium
+description: |
+  > **Jinja Forge**: a service that renders custom "snippets" with the Jinja2 template engine.
+  > Templates are filtered to prevent abuse, but the vault might have a flaw.
+  > Find how to access the secret.
+category: web
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**Shellmates**"
+flags:
+  - shellmates{s7i_byp4ss_v1a_c0nt3xt_p0llut10n}
+tags:
+  - web
+  - ssti
+  - jinja2
+  - sandbox
+files:
+  - app.py
+deployment:
+  isolate: true
+  conn_type: http
+  containerPort: 3000

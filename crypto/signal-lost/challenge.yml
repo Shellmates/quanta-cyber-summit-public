@@ -1,0 +1,28 @@
+name: "signal-lost"
+author: "Shellmates"
+author_link: "https://github.com/Shellmates"
+difficulty: medium
+description: |
+  > Two ciphertexts were intercepted, both encrypted with the **same key**.
+  > A third file contains a known message encoded in **Morse code**.
+  > Recover the secret. The flag format is `shellmates{...}`.
+category: crypto
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**Shellmates**"
+flags:
+  - shellmates{m0rs3_4nd_x0r_k3y_r3us3}
+tags:
+  - crypto
+  - xor
+  - morse
+  - key-reuse
+files:
+  - ciphertext1.hex
+  - ciphertext2.hex
+  - message_morse.txt

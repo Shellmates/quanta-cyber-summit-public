@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  crypto-chall:
+    build: .
+    ports:
+      - "7000:7000"
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    command: sh -c "socat TCP-LISTEN:7000,reuseaddr,fork EXEC:'python -u chall.py',pty,stderr"

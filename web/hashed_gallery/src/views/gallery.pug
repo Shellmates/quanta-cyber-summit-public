@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h2 Cars Gallery — Page #{page}
+  .grid
+    each pic in pics
+      .card
+        a(href=`/api/picture/${pic.hash}`)
+          img(src=`/api/picture/${pic.hash}` alt=`car-${pic.number}` style="max-width:100%;border-radius:6px")
+        p(style="word-break:break-all;font-size:12px;margin-top:8px") #{pic.hash}
+
+  .pagination
+    if page > 1
+      a(href=`/gallery?page=${page-1}`) Prev
+      |  
+    if page < totalPages
+      a(href=`/gallery?page=${page+1}`) Next

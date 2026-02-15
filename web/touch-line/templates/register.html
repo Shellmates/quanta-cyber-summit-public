@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Join the Blog{% endblock %}
+
+{% block content %}
+  <h1>Join the Blog</h1>
+  <p class="muted">Create an account to comment soon and build your supporter profile.</p>
+
+  <form method="post" action="{{ url_for('auth.register') }}">
+    <label for="username">Username</label>
+    <input id="username" name="username" value="{{ username if username else '' }}" required>
+
+    <label for="password">Password</label>
+    <input id="password" type="password" name="password" required>
+
+    <label for="bio">Bio</label>
+    <textarea id="bio" name="bio" placeholder="Tell readers which club you follow and why...">{{ bio if bio else '' }}</textarea>
+
+    <button type="submit">Create Account</button>
+  </form>
+{% endblock %}

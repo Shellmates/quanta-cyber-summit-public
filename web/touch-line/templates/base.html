@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Touchline Journal{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <main class="page">
+      <header class="site-header">
+        <p class="league-tag">Independent Football Blog</p>
+        <a class="brand" href="{{ url_for('posts.index') }}">Touchline Journal</a>
+        <p class="tagline">Match reports, tactical notes, and fan stories from across the week.</p>
+      </header>
+
+      <nav>
+        <a href="{{ url_for('posts.index') }}">Home</a>
+        <a href="{{ url_for('posts.report_blogs') }}">Report Blogs</a>
+        {% if current_user %}
+          <a href="{{ url_for('auth.profile') }}">Profile ({{ current_user.username }})</a>
+          <form method="post" action="{{ url_for('auth.logout') }}">
+            <button type="submit">Log Out</button>
+          </form>
+        {% else %}
+          <a href="{{ url_for('auth.login') }}">Log In</a>
+          <a href="{{ url_for('auth.register') }}">Join</a>
+        {% endif %}
+      </nav>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

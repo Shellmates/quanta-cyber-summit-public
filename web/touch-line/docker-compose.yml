@@ -1,0 +1,16 @@
+services:
+  touchline-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: touch-line
+    environment:
+      SECRET_KEY: secret1_2are3_4secrets5_6in7_8secret_way
+      FLAG: shellmates{If_Y0U_rE_SE31ng_THIs_ch4P4Ux}
+      BOT_BASE_URL: https://touch-line.quantaclubdz.com
+      BOT_USERNAME: ZGtsYWpzZjMyMw
+      BOT_PASSWORD: MjM4ejk4ZHgza3prOTgya2x4
+      BOT_TIMEOUT_MS: "5000"
+    ports:
+      - "4002:4002"
+    restart: unless-stopped

@@ -1,0 +1,6 @@
+Analyze PCAP → Find APT repo at 172.22.0.3
+Extract HTTP objects → patch.deb, debug.zip, repo.conf
+Unpack patch.deb → Get ZIP password: G0ingM3rry_Sh1p
+Extract malware from data.tar.xz → Find ChaCha20 key: Luffy_Loves_Meet
+Decrypt C2 traffic on port 21
+Base64 decode → Flag

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUDOKU</title>
+<style>
+:root {
+--bg: #000000;
+--card: #1a1a1a;
+--text: #ffffff;
+--accent: #666666;
+--accent-dark: #444444;
+--border: #333333;
+--highlight: rgba(255, 255, 255, 0.1);
+--selected: rgba(255, 255, 255, 0.2);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+background: var(--bg);
+color: var(--text);
+font-family: 'Courier New', monospace;
+padding: 20px;
+line-height: 1.6;
+}
+.container {
+max-width: 900px;
+margin: 0 auto;
+text-align: center;
+}
+h1 {
+font-size: 2.5rem;
+margin-bottom: 10px;
+color: var(--text);
+letter-spacing: 2px;
+}
+h2 {
+color: var(--accent);
+margin: 30px 0 15px;
+font-size: 1.3rem;
+}
+p {
+margin: 15px 0;
+font-size: 1rem;
+color: var(--accent);
+}
+.sudoku-container {
+margin: 40px auto;
+padding: 20px;
+background: var(--card);
+border-radius: 4px;
+border: 1px solid var(--border);
+}
+table {
+margin: 0 auto;
+border-collapse: collapse;
+background: #000;
+}
+td {
+width: 50px;
+height: 50px;
+text-align: center;
+position: relative;
+}
+input {
+width: 100%;
+height: 100%;
+background: transparent;
+border: none;
+outline: none;
+font-size: 22px;
+color: var(--text);
+text-align: center;
+font-family: 'Courier New', monospace;
+}
+input.fixed {
+background: #222;
+color: #aaa;
+cursor: not-allowed;
+}
+tr:nth-child(3n) td { border-bottom: 2px solid var(--accent); }
+td:nth-child(3n) { border-right: 2px solid var(--accent); }
+td { border: 1px solid var(--border); }
+.selected {
+background: var(--selected)!important;
+}
+td:hover {
+background: var(--highlight);
+}
+.questions {
+margin: 40px 0;
+padding: 20px;
+background: var(--card);
+border-radius: 4px;
+border: 1px solid var(--border);
+}
+.question {
+margin: 25px 0;
+font-size: 1.1rem;
+}
+select, button {
+padding: 12px 24px;
+font-size: 16px;
+border-radius: 2px;
+margin: 10px;
+cursor: pointer;
+transition: all 0.2s;
+font-family: 'Courier New', monospace;
+}
+select {
+background: var(--bg);
+color: var(--text);
+border: 1px solid var(--accent);
+}
+button {
+background: var(--accent);
+color: #000;
+border: none;
+font-weight: bold;
+}
+button:hover {
+background: var(--text);
+}
+button.secondary {
+background: var(--card);
+color: var(--text);
+border: 1px solid var(--border);
+}
+button.secondary:hover {
+background: var(--border);
+}
+#result {
+margin-top: 30px;
+padding: 20px;
+font-size: 1.1rem;
+border-radius: 4px;
+min-height: 80px;
+background: var(--card);
+border: 1px solid var(--border);
+}
+.flag {
+color: var(--text);
+font-size: 1.8rem;
+font-weight: bold;
+}
+.model-code {
+margin-top: 20px;
+}
+.code-display {
+background: var(--bg);
+color: var(--accent);
+padding: 20px;
+border-radius: 4px;
+border: 1px solid var(--border);
+text-align: left;
+font-size: 0.85rem;
+overflow-x: auto;
+max-height: 400px;
+overflow-y: auto;
+display: none;
+}
+footer {
+margin-top: 60px;
+color: var(--accent-dark);
+font-size: 0.85rem;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>SOLVE YOUR SUDOKU</h1>
+<p>AI-Powered Sudoku Validator</p>
+<div class="sudoku-container">
+<h2>SUDOKU GRID</h2>
+<button class="secondary" onclick="loadNewPuzzle()">NEW PUZZLE</button>
+<table id="sudoku-table">
+<tbody></tbody>
+</table>
+</div>
+<div class="questions">
+<div class="question">
+<strong>Q1: IS THIS SUDOKU LOGICALLY VALID?</strong><br><br>
+<select id="user-answer">
+<option value="true">YES - IT'S VALID</option>
+<option value="false">NO - IT'S INVALID</option>
+</select>
+</div>
+<div class="question">
+<strong>Q2: WHAT WILL THE AI BOT PREDICT?</strong><br><br>
+<select id="bot-prediction">
+<option value="VALID">BOT WILL SAY VALID</option>
+<option value="INVALID">BOT WILL SAY INVALID</option>
+</select>
+</div>
+<br>
+<button onclick="submitGrid()">SUBMIT & VALIDATE</button>
+<button class="secondary" onclick="clearGrid()">CLEAR GRID</button>
+</div>
+<div class="model-code">
+<button class="secondary" onclick="toggleModelCode()">VIEW MODEL ARCHITECTURE</button>
+<div id="code-display" class="code-display"></div>
+</div>
+<div id="result">
+Complete the puzzle (you cannot change the given numbers), then answer both questions and submit...
+</div>
+<footer>
+CTF Challenge - AI/ML Security
+</footer>
+</div>
+
+<script>
+const table = document.querySelector('#sudoku-table');
+const inputs = [];
+let currentRow = 0;
+let currentCol = 0;
+
+for (let i = 0; i < 9; i++) {
+    const row = table.insertRow();
+    for (let j = 0; j < 9; j++) {
+        const cell = row.insertCell();
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.maxLength = 1;
+        input.pattern = '[1-9]';
+        cell.appendChild(input);
+        inputs.push(input);
+
+        input.addEventListener('input', (e) => {
+            const val = e.target.value;
+            if (!/[1-9]/.test(val)) e.target.value = '';
+        });
+
+        input.addEventListener('focus', () => {
+            currentRow = i;
+            currentCol = j;
+            updateSelection();
+        });
+    }
+}
+
+function updateSelection() {
+    document.querySelectorAll('td').forEach(td => td.classList.remove('selected'));
+    const index = currentRow * 9 + currentCol;
+    if (inputs[index]) {
+        inputs[index].parentElement.classList.add('selected');
+        inputs[index].focus();
+    }
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowUp' && currentRow > 0) currentRow--;
+    else if (e.key === 'ArrowDown' && currentRow < 8) currentRow++;
+    else if (e.key === 'ArrowLeft' && currentCol > 0) currentCol--;
+    else if (e.key === 'ArrowRight' && currentCol < 8) currentCol++;
+    else return;
+    e.preventDefault();
+    updateSelection();
+});
+
+inputs[0].focus();
+updateSelection();
+
+function clearGrid() {
+    inputs.forEach((input, idx) => {
+        if (!input.classList.contains('fixed')) input.value = '';
+    });
+    inputs[0].focus();
+    updateSelection();
+    document.getElementById('result').innerHTML = 'Editable cells cleared. Fill the puzzle and submit!';
+}
+
+function toggleModelCode() {
+    const display = document.getElementById('code-display');
+    if (display.style.display === 'block') {
+        display.style.display = 'none';
+        return;
+    }
+    fetch('/get_model_code')
+        .then(r => r.json())
+        .then(data => {
+            display.innerHTML = '<pre>' + escapeHtml(data.code) + '</pre>';
+            display.style.display = 'block';
+        })
+        .catch(() => {
+            display.innerHTML = 'Error loading model code.';
+            display.style.display = 'block';
+        });
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function loadNewPuzzle() {
+    fetch('/get_puzzle')
+        .then(r => r.json())
+        .then(data => {
+            const puzzle = data.puzzle;
+            const fixed = data.fixed;
+            for (let i = 0; i < 9; i++) {
+                for (let j = 0; j < 9; j++) {
+                    const idx = i*9 + j;
+                    const val = puzzle[i][j];
+                    inputs[idx].value = val || '';
+                    if (fixed[i][j] === 1) {
+                        inputs[idx].readOnly = true;
+                        inputs[idx].classList.add('fixed');
+                    } else {
+                        inputs[idx].readOnly = false;
+                        inputs[idx].classList.remove('fixed');
+                    }
+                }
+            }
+            document.getElementById('result').innerHTML = 'New puzzle loaded. Complete the empty cells (fixed numbers cannot be changed).';
+        })
+        .catch(() => {
+            document.getElementById('result').innerHTML = 'Failed to load puzzle.';
+        });
+}
+
+window.onload = loadNewPuzzle;
+
+function submitGrid() {
+    const grid = [];
+    for (let i = 0; i < 9; i++) {
+        const row = [];
+        for (let j = 0; j < 9; j++) {
+            const val = inputs[i*9 + j].value || 0;
+            row.push(val == 0 ? 0 : parseInt(val));
+        }
+        grid.push(row);
+    }
+
+    const hasEmpty = grid.some(row => row.includes(0));
+    if (hasEmpty) {
+        document.getElementById('result').innerHTML = 'ERROR: Please fill all empty cells with numbers 1-9';
+        return;
+    }
+
+    const userAnswer = document.getElementById('user-answer').value === 'true';
+    const botPrediction = document.getElementById('bot-prediction').value;
+
+    fetch('/validate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            grid: grid,
+            user_answer: userAnswer,
+            bot_prediction: botPrediction
+        })
+    })
+    .then(r => r.json())
+    .then(data => {
+        let msg = `BOT PREDICTION: ${data.bot_prediction}<br>`;
+        if (data.flag) {
+            msg += `<span class="flag">FLAG: ${data.flag}</span><br><br>${data.explanation || data.message}`;
+        } else {
+            msg += data.message || "ACCESS DENIED";
+        }
+        document.getElementById('result').innerHTML = msg;
+    })
+    .catch(() => {
+        document.getElementById('result').innerHTML = "CONNECTION ERROR";
+    });
+}
+</script>
+</body>
+</html>

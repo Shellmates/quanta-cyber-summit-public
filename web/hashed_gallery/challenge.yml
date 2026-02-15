@@ -1,0 +1,20 @@
+name: hashed_gallery
+author: COn4n
+author_link: https://github.com/Abdo30004
+difficulty: medium
+description: |
+  > Fantastic Cars Gallery, watch all the cars you like securely, Maybe!
+category: web
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**COn4n**"
+flags:
+  - shellmates{sSTi_wiTH_Es6_MoDuleS_noT_A_baD_iDEa}
+tags:
+  - web
+connection_info: https://hashed-gallery.quantaclubdz.com

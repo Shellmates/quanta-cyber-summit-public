@@ -1,0 +1,21 @@
+name: Hop-Hop
+author: Spinel99
+author_link: https://www.linkedin.com/in/medjber-abderrahim/
+difficulty: medium
+description: |
+  > Hop Hop little bunny, I am coming to eat you...
+category: pwn
+type: dynamic
+value: 500
+extra:
+    initial: 500
+    decay: 10
+    minimum: 50
+state: hidden
+attribution: "**Spinel99**"
+flags:
+  - shellmates{H0p_H0p_4w4y!!!}
+files:
+  - dist/chall
+  - dist/Dockerfile
+connection_info: ncat --ssl hop-hop.quantaclubdz.com 1337

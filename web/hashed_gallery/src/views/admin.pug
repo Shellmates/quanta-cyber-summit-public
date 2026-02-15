@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h2 Admin — Messages
+  if submissions && submissions.length
+    each s in submissions
+      .card
+        p
+          strong Name: 
+          | #{s.name}
+          br
+          strong Email: 
+          | #{s.email}
+          br
+          small Submitted: #{s.when}
+        p #{s.message}
+  else
+    p No messages yet.
